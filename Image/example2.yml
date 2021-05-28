@@ -1,0 +1,21 @@
+resources:
+  - name: Image_2
+    type: Image
+    configuration:
+      registry: s_artifactory
+      sourceRepository: docker-local
+      imageName: ubuntu
+      imageTag: latest
+
+pipelines:
+  - name: pipelines_IMAGE_2
+    steps:
+      - name: step_IMAGE_2
+        type: PowerShell
+        configuration:
+          nodePool: win_2019
+          inputResources:
+            - name: Image_2
+        execution:
+          onExecute:
+            - write-output "executing step..."
