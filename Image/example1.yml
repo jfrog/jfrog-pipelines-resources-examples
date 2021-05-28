@@ -1,0 +1,24 @@
+resources:  
+  - name: Image_1
+    type: Image	
+    configuration:	   
+      registry: PSSG_DockerRegistry	      
+      imageName: docker/jfreq_win	      
+      imageTag: latest	
+      autoPull: true
+
+pipelines:
+  - name: pipelines_Image_1
+    steps:
+      - name: step_Image_1
+        type: PowerShell
+        configuration:
+          nodePool: win_2019
+          inputResources:
+            - name: Image_1
+        execution:
+          onExecute:
+            - write-output "executing step..."
+            - if($Image_1_isTrigger -ne "true"){
+              Write-Error "Stop" -ErrorAction Stop
+              }
