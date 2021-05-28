@@ -1,0 +1,18 @@
+resources:
+  - name: 		MyIncomingWebhookResource
+    type: 		IncomingWebhook
+    configuration:
+      webhookName: MyIncomingWebhookIntegration
+
+pipelines:
+  - name: ExamplePipeline
+  - steps:
+    - name: ExampleStep
+      type: Bash
+      configuration:
+        inputResources:
+          - name: MyIncomingWebhookResource
+      execution:
+          onExecute:
+            - echo "$res_MyIncomingWebhookResource_payload" | jq '.' > payload.json
+            - read_json payload.json "LESSER_SECRET_FORMULA"
