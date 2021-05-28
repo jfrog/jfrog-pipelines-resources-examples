@@ -1,0 +1,24 @@
+resources:
+  - name: 		MyOutgoingJSONResource
+    type: 		OutgoingWebhook
+    configuration:
+      webhookName: MyOutgoingJSONResource
+      path: /json
+
+pipelines:
+  - name: ExamplePipeline
+  - steps:
+    - name: my_send_hook_json
+      type: Bash
+      configuration:
+        outputResources:
+          - name: MyOutgoingJSONResource
+      execution:
+          onExecute:
+            - jsonPayload="{\"runNumber\":\"$run_number\", \"stepName\":\"$step_name\"}"
+            - set_payload MyOutgoingJSONResource "$jsonPayload"
+          onFailure:
+            - export res_MyOutgoingJSONResource_skipWebHook=true
+          onSuccess:
+            - echo "Payload sent by "$res_MyOutgoingJSONResource_name":"
+            - echo $res_My-Outgoing-JSON-Resource_payload
