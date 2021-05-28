@@ -1,1 +1,1 @@
-A FileSpec resource specifies a <a href="https://www.jfrog.com/confluence/display/JFROG/Using+File+Specst="_top">File Spec</a>, which provides the details of files to upload or download from Artifactory. 
+A FileSpec resource specifies a <a href="https://www.jfrog.com/confluence/display/JFROG/Using+File+Specstarget="_top">File Spec</a>, which provides the details of files to upload or download from Artifactory. 
