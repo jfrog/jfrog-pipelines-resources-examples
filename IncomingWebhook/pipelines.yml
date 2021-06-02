@@ -1,12 +1,12 @@
 resources:
-  - name: 		MyIncomingWebhookResource
-    type: 		IncomingWebhook
+  - name: MyIncomingWebhookResource
+    type: IncomingWebhook
     configuration:
       webhookName: MyIncomingWebhookIntegration
 
 pipelines:
   - name: ExamplePipeline
-  - steps:
+    steps:
     - name: ExampleStep
       type: Bash
       configuration:
