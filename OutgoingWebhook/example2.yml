@@ -1,6 +1,6 @@
 resources:
-  - name: 		MyOutgoingJSONResource
-    type: 		OutgoingWebhook
+  - name: MyOutgoingJSONResource
+    type: OutgoingWebhook
     configuration:
       webhookName: MyOutgoingJSONResource
       path: /json
