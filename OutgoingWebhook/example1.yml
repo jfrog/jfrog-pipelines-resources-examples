@@ -19,4 +19,4 @@ pipelines:
           onExecute:
             - echo "hello world"
             - formUrlEncodedPayload="foo=bar&runNumber=$run_number&stepName=$step_name"
-            - set_payload johns_OutHook_formurl "$formUrlEncodedPayload"
+            - set_payload My_OutHook_formurl_Resource "$formUrlEncodedPayload"
