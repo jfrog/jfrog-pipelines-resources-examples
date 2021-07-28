@@ -21,4 +21,4 @@ pipelines:
             - export res_MyOutgoingJSONResource_skipWebHook=true
           onSuccess:
             - echo "Payload sent by "$res_MyOutgoingJSONResource_name":"
-            - echo $res_My-Outgoing-JSON-Resource_payload
+            - echo $res_MyOutgoingJSONResource_payload
