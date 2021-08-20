@@ -15,6 +15,7 @@ pipelines:
         execution:
           onExecute:
             - write_output resource_PropertyBag_2 runNumber=${run_number}
+            
   - name: pipeline_PropertyBag_3
     configuration:
       dependencyMode:
