@@ -23,9 +23,9 @@ pipelines:
             - name: S_WF_010_trigger
           outputResources:
             - name: S_WF_010_resource1
-        execution:
-          onExecute:
-            - write_output S_WF_010_resource1 runNumber=${run_number}
+        #execution:
+          #onExecute:
+            #- write_output S_WF_010_resource1 runNumber=${run_number}
       - name: S_WF_010_input2
         type: Bash
         configuration:
