@@ -3,6 +3,7 @@ resources:
     type: PropertyBag
     configuration:
       runNumber: 0
+      
   - name: S_WF_010_resource2
     type: PropertyBag
     configuration:
@@ -23,9 +24,10 @@ pipelines:
             - name: S_WF_010_trigger
           outputResources:
             - name: S_WF_010_resource1
-        #execution:
-          #onExecute:
-            #- write_output S_WF_010_resource1 runNumber=${run_number}
+        execution:
+          onExecute:
+            - write_output S_WF_010_resource1 runNumber=${run_number}
+            
       - name: S_WF_010_input2
         type: Bash
         configuration:
@@ -36,6 +38,7 @@ pipelines:
         execution:
           onExecute:
             - echo "test"
+            
       - name: S_WF_010
         type: Bash
         configuration:
