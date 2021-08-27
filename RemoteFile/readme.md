@@ -5,3 +5,5 @@ This resource holds information of a RemoteFile that is stored on the following 
 - AWS S3
 - Google Cloud Storage
 - File Server
+
+For more information, see https://www.jfrog.com/confluence/display/JFROG/RemoteFile.
