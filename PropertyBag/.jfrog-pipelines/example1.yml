@@ -1,0 +1,23 @@
+resources:
+  - name: propertyBag_1
+    type: PropertyBag
+    configuration:
+      property1: "jfrog"
+      property2: "pipelines"
+
+pipelines:
+  - name: pipeline_PropertyBag_1
+    steps:
+      - name: step_propertyBag_1
+        type: PowerShell
+        configuration:
+          nodePool: win_2019
+          inputResources:
+            - name: propertyBag_1
+        execution:
+          onExecute:
+            - write-output "onExecute"
+            - get-variable -name property1
+            - get-variable -name property2
+          onSuccess:
+            - write-output "onSuccess"
