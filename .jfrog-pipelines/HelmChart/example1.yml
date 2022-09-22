@@ -1,0 +1,45 @@
+resources:
+  - name: git_repo
+    type: GitRepo
+    configuration:
+      gitProvider: git_r
+      path: jfrog/charts
+   
+  - name: helm_repo
+    type: HelmChart
+    configuration: 
+      sourceArtifactory: art_r
+      repository: helm-local/
+      chart: test
+      version: 1.0.0
+
+pipelines:
+  - name: test_helm
+    configuration:
+      nodePool: win_2019
+
+    steps:
+      - name: helm_pub
+        type: HelmPublish
+        configuration:
+          chartPath: ./simplehelm
+ 
+          inputResources:
+            - name: git_repo                    
+          outputResources:
+            - name: helm_repo                  # required
+ 
+        execution:
+          onStart:
+            - write-output "executing step..."
+            - Get-Variable | format-table
+          onSuccess:
+            - write-output "executing step..."
+            - Get-Variable | format-table
+          onFailure:
+            - write-output "executing step..."
+            - Get-Variable | format-table
+
+          onComplete: #always
+            - write-output "executing step..."
+            - Get-Variable | format-table
