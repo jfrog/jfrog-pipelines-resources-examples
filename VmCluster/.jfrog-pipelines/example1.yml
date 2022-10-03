@@ -1,0 +1,19 @@
+resources:
+   - name: vmCluster_1
+     type: VmCluster
+     configuration:
+       sshKey: SR_SSHKEYS
+       targets:
+         - 1.2.3.4
+
+pipelines:
+  - name: pipelines_1
+    steps:
+      - name: VM_0001
+        type: PowerShell
+        configuration:
+          inputResources:
+            - name: vmCluster_1
+        execution:
+          onExecute:
+            - write-output "executing step..."
