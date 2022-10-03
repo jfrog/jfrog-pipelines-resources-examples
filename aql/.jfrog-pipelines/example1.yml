@@ -1,0 +1,30 @@
+resources:
+  - name: Aql_ART_1
+    type: Aql
+    configuration:
+      sourceArtifactory: s_artifactory
+      query: items.find({"@build.name":{"$eq":"art"}})
+      addedProperties:
+        key1: value1
+        key2: value2
+      mappings:
+        - name: mapping1
+          input: IN
+          output: test1
+        - name: mapping2
+          input: IN
+          output: test2
+
+pipelines:
+  - name: pipelines_ART_1
+    steps:
+      - name: step_ART_1
+        type: PowerShell
+        configuration:
+          nodePool: win_2019
+          inputResources:
+            - name: Aql_ART_1
+              trigger: true
+        execution:
+          onExecute:
+            - write-output "executing step..."
