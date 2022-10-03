@@ -1,0 +1,19 @@
+resources:
+  - name: Get_Files
+    type: FileSpec
+    configuration:
+      sourceArtifactory: myArtifactory
+      aql: "{'repo': 'docker-local'}"
+    
+pipelines:
+  - name: PropertyDemo
+    steps:
+      - name: ArtifactoryFiles
+        type: Bash
+        configuration:
+          inputResources:
+            - name: Get_Files
+        execution:
+          onExecute:
+            - cat $HOME/.jfrog/logs/jfrog-cli*
+            - ls
