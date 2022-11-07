@@ -10,8 +10,8 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: art
-      buildName: SampleApp
-      buildNumber: 1          
+      buildName: ${JFROG_CLI_BUILD_NAME}
+      buildNumber: ${JFROG_CLI_BUILD_NUMBER}          
 pipelines:  
   - name: basic_pipeline
     configuration:
