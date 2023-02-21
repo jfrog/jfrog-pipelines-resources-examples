@@ -1,0 +1,31 @@
+resources:
+  - name: myAqlResource
+    type: Aql
+    configuration:
+      sourceArtifactory: myArtifactoryIntegration
+      query: 'items.find({"$and": [{"repo": {"$eq": "example-repo-local"}}, {"name": {"$match": "myFile.txt"}}]})'
+      mappings:
+        - name: myMapping
+          input: example-repo-local/myFile.txt
+          output: example-repo-local/myFile_2.txt
+
+  - name: myReleaseBundle
+    type: ReleaseBundle
+    configuration:
+      sourceDistribution: myDistributionIntegration
+      name: name
+      version: '1'
+
+pipelines:
+  - name: myCreateReleaseBundlePipeline
+    steps:
+      - name: myCreateReleaseBundleStep
+        type: CreateReleaseBundle
+        configuration:
+          releaseBundleName: ${JFROG_CLI_BUILD_NAME}
+          releaseBundleVersion: ${run_id}
+          dryRun: false
+          inputResources:
+            - name: myAqlResource
+          outputResources:
+            - name: myReleaseBundle
