@@ -2,7 +2,7 @@ resources:
   - name: Aql_ART_1
     type: Aql
     configuration:
-      sourceArtifactory: s_artifactory
+      sourceArtifactory: myArtifactoryIntegration
       query: items.find({"@build.name":{"$eq":"art"}})
       addedProperties:
         key1: value1
