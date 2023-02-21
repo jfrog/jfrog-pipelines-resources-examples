@@ -1,0 +1,40 @@
+resources:
+  - name: myAqlResource
+    type: Aql
+    configuration:
+      sourceArtifactory: myArtifactoryIntegration
+      query: items.find({"@build.name":{"$eq":"buildName"}})
+  - name: myReleaseBundle
+    type: ReleaseBundle
+    configuration:
+      sourceDistribution: myDistributionIntegration
+      name: name
+      version: '1'
+
+pipelines:
+  - name: pipelineToUpdateResource
+    steps:
+      - name: myBashStep
+        type: Bash
+        configuration:
+          integrations:
+            - name: myArtifactoryIntegration
+          outputResources:
+            - name: myAqlResource
+        execution:
+          onExecute:
+            - write_output myAqlResource query='items.find({"@build.name":{"$eq":"myBuildName"}})'
+
+  - name: CreateReleaseBundlePipeline
+    configuration:
+      inputResources:
+        - name: myAqlResource
+      outputResources:
+        - name: myReleaseBundle
+    steps:
+      - name: myCreateReleaseBundleStep
+        type: CreateReleaseBundle
+        configuration:
+          releaseBundleName: ${JFROG_CLI_BUILD_NAME}
+          releaseBundleVersion: ${run_id}
+          dryRun: true
