@@ -1,21 +1,21 @@
 resources:
-  - name: FileSpec_0007
+  - name: FileSpec_4
     type: FileSpec
     configuration:
-      sourceArtifactory: s_artifactory
+      sourceArtifactory: myArtifactory
       pattern: "test-local/setup/"
       recursive: false
       archiveEntries: "#/artifactory"
 
 pipelines:
-  - name: pipelines_FLSPEC_0007
+  - name: pipelines_FileSpec_3
     steps:
-      - name: step_FLSPEC_0007
+      - name: step_FileSpec_3
         type: PowerShell
         configuration:
           nodePool: win_2019
           inputResources:
-            - name: FileSpec_0007
+            - name: FileSpec_3
         execution:
           onExecute:
             - write-output "executing step..."
