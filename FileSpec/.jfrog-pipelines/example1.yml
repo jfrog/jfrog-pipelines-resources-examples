@@ -8,7 +8,7 @@ resources:
       offset: 1@3
 
 pipelines:
-  - name: pipes_FileSpec_1
+  - name: pipe_FileSpec_1
     steps:
       - name: step_FileSpec_1
         type: PowerShell
