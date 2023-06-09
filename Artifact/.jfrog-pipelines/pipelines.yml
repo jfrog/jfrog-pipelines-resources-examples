@@ -1,0 +1,74 @@
+resources:
+  - name: artifact_test
+    type: Artifact
+    configuration:
+      jfrogPlatformProvider: myIntegration        # JFrog Platform Access Token integration
+      repositories:
+        - example-repo
+      artifactPath:
+        include:
+          - tools/*
+        exclude:
+          - tools/exclude/*
+      buildOn:
+        deployed: true
+      branches:
+        include: artifactResource
+        exclude: master
+  - name: artifact_2
+    type: Artifact
+    configuration:
+      jfrogPlatformProvider: myIntegration        # JFrog Platform Access Token integration
+      repositories:
+        - example-repo-local
+      artifactPath:
+        include:
+          - tools/*
+        exclude:
+          - tools/exclude/*
+      buildOn:
+        deployed: true
+        cached: true
+        deleted: true
+      branches:
+        include: artifactResource
+  - name: artifact_1
+    type: Artifact
+    configuration:
+      jfrogPlatformProvider: myIntegration        # JFrog Platform Access Token integration
+      repositories:
+        - example-repo-local
+      artifactPath:
+        include:
+          - default/*
+          - tools/*
+      buildOn:
+        deployed: true
+      branches:
+        include: artifactResource
+
+pipelines:
+  - name: my_pipe_1
+    configuration:
+      jfrogCliVersion: 2
+    steps:
+      - name: step_1
+        type: Bash
+        configuration:
+          inputResources:
+            - name: artifact_1
+        execution:
+          onExecute:
+            - echo "executing step_1"
+  - name: my_pipe_2
+    steps:
+      - name: step_1
+        type: Bash
+        configuration:
+          inputResources:
+            - name: artifact_2
+        execution:
+          onExecute:
+            - echo "executing step_1"
+            - echo "sync started"
+            
