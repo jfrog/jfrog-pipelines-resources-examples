@@ -1,0 +1,75 @@
+resources:
+    - name: host_version_file
+      type: FileSpec
+      configuration:
+          sourceArtifactory: myArtifactory
+          aql: '{"items.find":{"type":"file","repo":{"$eq":"test-version-stg"},"name":{"$match":"host-*.json"}}}'
+          sortBy: 
+            - updated
+          sortOrder: desc
+          limit : 1
+    - name: portal_version_file
+      type: FileSpec
+      configuration:
+          sourceArtifactory: myArtifactory
+          aql: '{"items.find":{"type":"file","repo":{"$eq":"test-version-stg"},"name":{"$match":"portal-*.json"}}}'
+          sortBy: 
+            - updated
+          sortOrder: desc
+          limit : 1
+    - name: collections_version_file
+      type: FileSpec
+      configuration:
+          sourceArtifactory: myArtifactory
+          aql: '{"items.find":{"type":"file","repo":{"$eq":"test-version-stg"},"name":{"$match":"iotics-collections-engine-*.json"}}}'
+          sortBy: 
+            - updated
+          sortOrder: desc
+          limit : 1
+    - name: interactions_version_file
+      type: FileSpec
+      configuration:
+          sourceArtifactory: myArtifactory
+          aql: '{"items.find":{"type":"file","repo":{"$eq":"test-version-stg"},"name":{"$match":"iotics-interaction-engine-*.json"}}}'
+          sortBy: 
+            - updated
+          sortOrder: desc
+          limit : 1
+pipelines:
+    - name: FileSpecWithAQL
+      steps:
+          - name: merge_files
+            type: Bash
+            configuration:
+                affinityGroup: myAffinity
+                inputResources:
+                    - name: host_version_file
+                    - name: portal_version_file
+                    - name: collections_version_file
+                    - name: interactions_version_file
+            execution:
+                onExecute:
+                  - |
+                      jq -s '.[0] * .[1] * .[2] * .[3]' \
+                      $res_host_version_file_resourcePath/* \
+                      $res_portal_version_file_resourcePath/* \
+                      $res_collections_version_file_resourcePath/* \
+                      $res_interactions_version_file_resourcePath/* > $shared_workspace/space_version.json
+                  - cat $shared_workspace/space_version.json
+          - name: upload_result
+            type: UploadArtifact
+            configuration:
+                affinityGroup: myAffinity
+                inputSteps:
+                    - name: merge_files
+                targetPath: test-version-stg/space-v23.0.$run_number.json
+                sourcePath: $shared_workspace/space_version.json
+                integrations:
+                    - name: myArtifactory
+            execution:
+                onStart:
+                    - echo "Uploading..."
+                onSuccess:
+                    - echo "Uploaded"
+                onFailure:
+                    - echo "Failed to upload"
