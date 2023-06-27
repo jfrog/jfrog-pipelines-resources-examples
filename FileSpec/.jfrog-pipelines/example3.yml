@@ -9,7 +9,7 @@ resources:
       buildNumber: 1@3
 
 pipelines:
-  - name: pipelines_FileSpec_3
+  - name: pipelines_FileSpec_3a
     steps:
       - name: step_FileSpec_3
         type: PowerShell
