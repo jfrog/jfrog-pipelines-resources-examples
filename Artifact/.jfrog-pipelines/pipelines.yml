@@ -5,7 +5,7 @@ resources:
       jfrogPlatformProvider: tokenIntegration        # required; JFrog Platform Access Token integration
       repositories:                                  # required
         - samples-example-repo-local
-      artifactPath:                                  # required
+      artifactPath:                                  # optional
         include:
           - tools/*
         exclude:
