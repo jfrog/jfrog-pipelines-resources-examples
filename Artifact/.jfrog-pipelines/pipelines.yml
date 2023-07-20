@@ -48,7 +48,7 @@ resources:
         include: artifactResource
 
 pipelines:
-  - name: my_pipe_1
+  - name: artifact_resource_pipe_1
     configuration:
       jfrogCliVersion: 2
     steps:
@@ -60,7 +60,7 @@ pipelines:
         execution:
           onExecute:
             - echo "executing step_1"
-  - name: my_pipe_2
+  - name: artifact_resource_pipe_2
     steps:
       - name: step_1
         type: Bash
@@ -71,4 +71,3 @@ pipelines:
           onExecute:
             - echo "executing step_1"
             - echo "sync started"
-            
