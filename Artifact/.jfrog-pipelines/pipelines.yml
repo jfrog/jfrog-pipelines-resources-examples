@@ -53,5 +53,6 @@ pipelines:
             - name: artifact_2
         execution:
           onExecute:
-            - echo "executing step_1"
+            - echo "executing step_2"
             - echo "sync started"
+            - update_run_description "Triggered on event_type $res_pipeline_trigger_event_type in artifact_path $res_pipeline_trigger_event_path"
