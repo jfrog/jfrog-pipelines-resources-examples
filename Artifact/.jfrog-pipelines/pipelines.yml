@@ -32,4 +32,4 @@ pipelines:
         execution:
           onExecute:
             - echo "executing step_1"
-            - update_run_description "Triggered on event_type $res_pipeline_trigger_event_type in artifact_path $res_pipeline_trigger_event_path"
+            - update_run_description "Triggered on event_type $res_artifact_res_event_type in artifact_path $res_artifact_res_event_path"
