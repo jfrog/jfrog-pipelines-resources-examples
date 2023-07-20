@@ -4,7 +4,7 @@ resources:
     configuration:
       jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
       repositories:
-        - samples-example-repo-local
+        - samples-example-repo-localsdasdf
       artifactPath:
         include:
           - tools/*
