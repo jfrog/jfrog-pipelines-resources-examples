@@ -2,20 +2,20 @@ resources:
   - name: artifact_res_1
     type: Artifact
     configuration:
-      jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
-      repositories:
+      jfrogPlatformProvider: tokenIntegration        # required; JFrog Platform Access Token integration
+      repositories:                                  # required
         - samples-example-repo-local
-      artifactPath:
+      artifactPath:                                  # required
         include:
           - tools/*
         exclude:
           - tools/exclude/*
-      buildOn:
+      buildOn:                                       # required
         deployed: true
         cached: true
         deleted: true
-      branches:
-        include: master
+      branches:                                      # required
+        include: master                              # required
   - name: artifact_res_2
     type: Artifact
     configuration:
