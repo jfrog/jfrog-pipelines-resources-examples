@@ -16,12 +16,12 @@ resources:
         deleted: true
       branches:
         include: master
-  - name: artifact_2a
+  - name: artifact_2
     type: Artifact
     configuration:
       jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
       repositories:
-        - samples-another-repo-local
+        - samples-example-repo-local
       artifactPath:
         include:
           - default/*
@@ -46,11 +46,11 @@ pipelines:
             - echo "executing step_1"
   - name: artifact_resource_pipe_2
     steps:
-      - name: step_2a
+      - name: step_2
         type: Bash
         configuration:
           inputResources:
-            - name: artifact_2a
+            - name: artifact_2
         execution:
           onExecute:
             - echo "executing step_1"
