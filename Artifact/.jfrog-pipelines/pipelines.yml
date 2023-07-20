@@ -14,6 +14,8 @@ resources:
         deployed: true
         cached: true
         deleted: true
+        copied: true
+        moved: true      
       branches:                                      # required
         include: master                              # required
   - name: artifact_res_2
