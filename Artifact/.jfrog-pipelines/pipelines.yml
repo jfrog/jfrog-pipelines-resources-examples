@@ -1,26 +1,10 @@
 resources:
-  - name: artifact_test
+  - name: artifact_1
     type: Artifact
     configuration:
       jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
       repositories:
-        - example-repo
-      artifactPath:
-        include:
-          - tools/*
-        exclude:
-          - tools/exclude/*
-      buildOn:
-        deployed: true
-      branches:
-        include: artifactResource
-        exclude: master
-  - name: artifact_2
-    type: Artifact
-    configuration:
-      jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
-      repositories:
-        - example-repo-local
+        - samples-example-repo-local
       artifactPath:
         include:
           - tools/*
@@ -31,13 +15,13 @@ resources:
         cached: true
         deleted: true
       branches:
-        include: artifactResource
-  - name: artifact_1
+        include: master
+  - name: artifact_2
     type: Artifact
     configuration:
       jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
       repositories:
-        - example-repo-local
+        - samples-another-repo-local
       artifactPath:
         include:
           - default/*
@@ -62,7 +46,7 @@ pipelines:
             - echo "executing step_1"
   - name: artifact_resource_pipe_2
     steps:
-      - name: step_1
+      - name: step_2
         type: Bash
         configuration:
           inputResources:
