@@ -16,7 +16,7 @@ resources:
         deleted: true
       branches:
         include: master
-  - name: artifact_2
+  - name: artifact_2a
     type: Artifact
     configuration:
       jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
