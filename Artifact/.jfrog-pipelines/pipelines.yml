@@ -1,5 +1,5 @@
 resources:
-  - name: artifact_1
+  - name: artifact_res_1
     type: Artifact
     configuration:
       jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
@@ -16,7 +16,7 @@ resources:
         deleted: true
       branches:
         include: master
-  - name: artifact_2
+  - name: artifact_res_2
     type: Artifact
     configuration:
       jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
@@ -40,7 +40,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: artifact_1
+            - name: artifact_res_1
         execution:
           onExecute:
             - echo "executing step_1"
@@ -50,7 +50,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: artifact_2
+            - name: artifact_res_2
         execution:
           onExecute:
             - echo "executing step_2"
