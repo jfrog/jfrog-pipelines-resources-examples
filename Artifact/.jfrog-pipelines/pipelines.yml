@@ -1,5 +1,5 @@
 resources:
-  - name: artifact_res_1
+  - name: artifact_res
     type: Artifact
     configuration:
       jfrogPlatformProvider: tokenIntegration        # required; JFrog Platform Access Token integration
@@ -18,20 +18,6 @@ resources:
         moved: true      
       branches:                                      # required
         include: master                              # required
-  - name: artifact_res_2
-    type: Artifact
-    configuration:
-      jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
-      repositories:
-        - samples-example-repo-local
-      artifactPath:
-        include:
-          - default/*
-          - tools/*
-      buildOn:
-        deployed: true
-      branches:
-        include: artifactResource
 
 pipelines:
   - name: artifact_resource_pipe_1
@@ -42,19 +28,8 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: artifact_res_1
+            - name: artifact_res
         execution:
           onExecute:
             - echo "executing step_1"
-  - name: artifact_resource_pipe_2
-    steps:
-      - name: step_2
-        type: Bash
-        configuration:
-          inputResources:
-            - name: artifact_res_2
-        execution:
-          onExecute:
-            - echo "executing step_2"
-            - echo "sync started"
             - update_run_description "Triggered on event_type $res_pipeline_trigger_event_type in artifact_path $res_pipeline_trigger_event_path"
