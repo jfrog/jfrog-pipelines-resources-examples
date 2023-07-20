@@ -2,7 +2,7 @@ resources:
   - name: artifact_test
     type: Artifact
     configuration:
-      jfrogPlatformProvider: myIntegration        # JFrog Platform Access Token integration
+      jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
       repositories:
         - example-repo
       artifactPath:
@@ -18,7 +18,7 @@ resources:
   - name: artifact_2
     type: Artifact
     configuration:
-      jfrogPlatformProvider: myIntegration        # JFrog Platform Access Token integration
+      jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
       repositories:
         - example-repo-local
       artifactPath:
@@ -35,7 +35,7 @@ resources:
   - name: artifact_1
     type: Artifact
     configuration:
-      jfrogPlatformProvider: myIntegration        # JFrog Platform Access Token integration
+      jfrogPlatformProvider: tokenIntegration        # JFrog Platform Access Token integration
       repositories:
         - example-repo-local
       artifactPath:
